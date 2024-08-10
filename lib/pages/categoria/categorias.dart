@@ -22,7 +22,6 @@ class _PanelCategoriaState extends State<PanelCategoria> {
 
   void getCategorias() async {
     categorias = await CrudCategoria.getListCategoria();
-    print(categorias.length);
     setState(() {});
   }
 

@@ -64,11 +64,13 @@ class CrudArticulo {
   static Future<void> putArticulo({required Articulo articulo}) async {
     try {
       final response =
-          await http.put(Uri.parse("$_apiURL/articulo/${articulo.clave}"),
+          await http.put(Uri.parse("$_apiURL/articulo/${articulo.id}"),
               headers: {
                 'Content-Type': 'application/json',
               },
               body: jsonEncode(articulo.toJson()));
+      print(jsonEncode(articulo.toJson()));
+
       if (response.statusCode != 200) {
         throw Exception('Error al actualizar el articulo');
       }

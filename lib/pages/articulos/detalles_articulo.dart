@@ -42,16 +42,13 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
     categorias = await CrudCategoria.getListCategoria();
     if (widget.idArticulo != null && widget.idArticulo!.isNotEmpty) {
       articulo = await CrudArticulo.getArticulo(idArticulo: widget.idArticulo!);
-
+      idCatalogo = articulo!.categoria!.id!.toString();
+      precios = articulo!.precios ?? [];
       if (articulo != null) {
         setState(() {
           idArticulo = articulo!.id.toString();
           cNombre.text = articulo!.nombre ?? '';
           valorarticulo = articulo!.activo ?? true;
-
-          if (articulo!.precios != null && articulo!.precios!.isNotEmpty) {
-            cPrecio.text = articulo!.precios![0].precio.toString();
-          }
         });
       }
     }
@@ -187,27 +184,32 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: articulo?.precios?.map((precio) {
-                              return Stack(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15, vertical: 10),
-                                    child: Text("\$${precio.precio}"),
-                                  ),
-                                  Positioned(
-                                    top: -3,
-                                    right: 0,
-                                    child: GestureDetector(
-                                      onTap: () {},
-                                      child: const Icon(
-                                          Icons.disabled_by_default_outlined),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }).toList() ??
-                            [],
+                        children: precios.map((precio) {
+                          return Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 10),
+                                child: Text(
+                                  "\$${precio.precio}",
+                                  style: const TextStyle(color: colorFondo),
+                                ),
+                              ),
+                              Positioned(
+                                top: -3,
+                                right: 0,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    precios.remove(precio);
+                                    setState(() {});
+                                  },
+                                  child: const Icon(
+                                      Icons.disabled_by_default_outlined),
+                                ),
+                              ),
+                            ],
+                          );
+                        }).toList(),
                       ),
                     ),
                   ],
@@ -395,14 +397,19 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
     if (idArticulo != null) {
       await CrudArticulo.putArticulo(
           articulo: Articulo(
+        clave: articulo!.clave!,
+        categoria: Categoria(id: value),
         id: articulo!.id!,
         nombre: cNombre.text,
         precios: precios,
-      ));
-      Navigator.pop(context);
+      )).then(
+        (value) {
+          Navigator.pop(context);
+        },
+      );
+
       setState(() {});
     } else {
-      print(idCatalogo);
       await CrudArticulo.postArticulo(
           articulo: Articulo(
               categoria: Categoria(id: int.parse(idCatalogo!)),

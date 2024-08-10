@@ -33,11 +33,11 @@ class Articulo {
   }
   Map<String, dynamic> toJson() {
     return {
-      'clave': clave,
-      'categoria': categoria != null ? {'id': categoria!.id} : null,
-      'nombre': nombre,
-      'precios': precios?.map((item) => item.toJson()).toList(),
-      'activo': activo,
+      'clave': clave ?? '',
+      'categoria': categoria != null ? {'id': categoria!.id ?? 0} : null,
+      'nombre': nombre ?? '',
+      'precios': precios?.map((item) => item.toJson()).toList() ?? [],
+      'activo': activo ?? true,
     };
   }
 }

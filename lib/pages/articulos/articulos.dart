@@ -22,7 +22,7 @@ class _PanelArticulosState extends State<PanelArticulos> {
 
   void getArticulos() async {
     articulos = await CrudArticulo.getListArticulo();
-    setState(() {}); // Actualiza el estado para redibujar el widget
+    setState(() {});
   }
 
   @override
@@ -137,6 +137,8 @@ class _PanelArticulosState extends State<PanelArticulos> {
                                 ),
                               ),
                             );
+                            getArticulos();
+                            setState(() {});
                           },
                           child: Container(
                             width: 40,
@@ -154,29 +156,31 @@ class _PanelArticulosState extends State<PanelArticulos> {
                 },
               ),
             ),
-            Expanded(
-                child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.grey),
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const PanelDetalleProducto(
-                              idArticulo: null,
-                            ),
-                          ),
-                        );
-                        setState(() {});
-                      },
-                      icon: const Icon(
-                        Icons.add,
-                        size: 40,
+            Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.grey),
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PanelDetalleProducto(
+                          idArticulo: null,
+                        ),
                       ),
-                    ))),
+                    );
+                    getArticulos();
+                    setState(() {});
+                  },
+                  icon: const Icon(
+                    Icons.add,
+                    size: 40,
+                  ),
+                )),
           ],
         ),
       ),

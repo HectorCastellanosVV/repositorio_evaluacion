@@ -27,6 +27,7 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
   bool valorarticulo = true;
   Articulo? articulo;
   String? idArticulo;
+  String? idCatalogo;
   List<Categoria> categorias = [];
   List<Precio> precios = [];
   int value = 1;
@@ -48,7 +49,6 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
           cNombre.text = articulo!.nombre ?? '';
           valorarticulo = articulo!.activo ?? true;
 
-          // Asume que el primer precio en la lista es el que se debe mostrar
           if (articulo!.precios != null && articulo!.precios!.isNotEmpty) {
             cPrecio.text = articulo!.precios![0].precio.toString();
           }
@@ -75,9 +75,7 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
               CircleAvatar(
                 radius: 50,
                 child: TextButton(
-                  onPressed: () async {
-                    // Agregar lógica para subir una foto si es necesario
-                  },
+                  onPressed: () async {},
                   child: const Text(
                     'Agregar\nFoto',
                     textAlign: TextAlign.center,
@@ -122,7 +120,7 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
                           ),
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: DropdownButton<String>(
-                            value: idArticulo,
+                            value: idCatalogo,
                             items: [
                               for (final categoria in categorias)
                                 DropdownMenuItem<String>(
@@ -133,7 +131,7 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
                             onChanged: (value) {
                               if (value != null) {
                                 setState(() {
-                                  idArticulo = value;
+                                  idCatalogo = value;
                                 });
                               }
                             },
@@ -404,10 +402,11 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
       Navigator.pop(context);
       setState(() {});
     } else {
-      idArticulo = generateRandomId(10);
+      print(idCatalogo);
       await CrudArticulo.postArticulo(
           articulo: Articulo(
-              id: int.parse(idArticulo!),
+              categoria: Categoria(id: int.parse(idCatalogo!)),
+              clave: generateRandomId(10),
               nombre: cNombre.text,
               precios: precios,
               activo: valorarticulo));

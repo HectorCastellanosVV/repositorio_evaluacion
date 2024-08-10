@@ -57,7 +57,7 @@ class CrudArticulo {
         throw Exception('Error al crear artículo: ${response.body}');
       }
     } catch (e) {
-      print('Error en postCategoria: ${e.toString()}');
+      print('Error en postArticulo: ${e.toString()}');
     }
   }
 

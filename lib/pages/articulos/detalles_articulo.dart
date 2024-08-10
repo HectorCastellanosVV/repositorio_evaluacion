@@ -272,7 +272,7 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
     required List<TextInputFormatter> listaType,
     String? errorText,
     FormFieldValidator<String>? funcionValidator,
-    required void Function(String) onPriceSubmitted, // Nuevo parámetro
+    required void Function(String) onPriceSubmitted,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -297,8 +297,7 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: const BorderSide(
-                color: Colors
-                    .grey, // Color del borde cuando el campo no está enfocado
+                color: Colors.grey,
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -310,20 +309,19 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: const BorderSide(
-                color: Colors.grey, // Color del borde cuando hay un error
+                color: Colors.grey,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: const BorderSide(
-                color: Colors
-                    .black, // Color del borde cuando el campo está enfocado y hay un error
+                color: Colors.black,
               ),
             ),
           ),
           onChanged: (value) {},
           validator: funcionValidator,
-          onFieldSubmitted: onPriceSubmitted, // Usa el nuevo parámetro aquí
+          onFieldSubmitted: onPriceSubmitted,
         )
       ],
     );
@@ -362,8 +360,7 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: const BorderSide(
-                color: Colors
-                    .grey, // Color del borde cuando el campo no está enfocado
+                color: Colors.grey,
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -375,14 +372,13 @@ class _PanelDetalleProductoState extends State<PanelDetalleProducto> {
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: const BorderSide(
-                color: Colors.grey, // Color del borde cuando hay un error
+                color: Colors.grey,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: const BorderSide(
-                color: Colors
-                    .black, // Color del borde cuando el campo está enfocado y hay un error
+                color: Colors.black,
               ),
             ),
           ),

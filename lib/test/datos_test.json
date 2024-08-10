@@ -1,0 +1,23 @@
+{
+    "Categoria": {
+        "clave": "C01",
+        "fechaCreado": 1569364107680,
+        "nombre": "Computadoras"
+    },
+    "Articulo": {
+        "clave": "L01",
+        "categoria": {
+            "id": 1
+        },
+        "nombre": "Lenovo",
+        "precios": [
+            {
+                "precio": 12000
+            },
+            {
+                "precio": 12500
+            }
+        ],
+        "activo": true
+    }
+}
